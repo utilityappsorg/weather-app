@@ -5,11 +5,12 @@ async function getWeather() {
   const apiKey = "d93ac9850368ef32ae6d5817e2826b26"; // Replace with your OpenWeatherMap API key
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${currentUnit}`;
 
-
+  showLoading();
   try {
     const response = await fetch(url);
     if (!response.ok) {
       document.getElementById("weatherResult").innerHTML = "City not found.";
+      hideLoading();
       return;
     }
 
@@ -30,6 +31,8 @@ async function getWeather() {
   } catch (error) {
     document.getElementById("weatherResult").innerHTML = "An error occurred.";
     console.error("Error fetching weather data:", error);
+  } finally {
+    hideLoading();
   }
 }
 
@@ -64,10 +67,12 @@ function getWeatherByCoords(lat, lon) {
   const apiKey = "d93ac9850368ef32ae6d5817e2826b26"; // Replace with your OpenWeatherMap API key
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${currentUnit}`;
 
+  showLoading();
   fetch(url)
     .then(response => {
       if (!response.ok) {
         document.getElementById("weatherResult").innerHTML = "Location not found.";
+        hideLoading();
         return;
       }
       return response.json();
@@ -91,6 +96,9 @@ function getWeatherByCoords(lat, lon) {
     .catch(error => {
       document.getElementById("weatherResult").innerHTML = "An error occurred.";
       console.error("Error fetching weather data:", error);
+    })
+    .finally(() => {
+      hideLoading();
     });
 }
 
@@ -111,23 +119,61 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function setWeatherBackground(weather, isNight) {
+  console.log("Raw weather input:", weather);
+
+  // Normalize
+  weather = weather.charAt(0).toUpperCase() + weather.slice(1).toLowerCase();
+
   document.body.classList.remove("sunny", "rainy", "cloudy", "night");
   document.getElementById("rainEffect").classList.remove("active");
   document.getElementById("snowEffect").classList.remove("active");
+
+  // Remove previous sun/rain elements
+  const oldSun = document.querySelector('.sun');
+  if (oldSun) oldSun.remove();
+  const oldRain = document.querySelector('.rain');
+  if (oldRain) oldRain.remove();
 
   if (isNight) {
     document.body.classList.add("night");
   } else if (weather === "Clear") {
     document.body.classList.add("sunny");
-  } else if (weather === "Rain" || weather === "Drizzle" || weather === "Thunderstorm") {
+    const sun = document.createElement('div');
+    sun.className = 'sun';
+    document.querySelector('.weather-app').appendChild(sun);
+  } else if (["Rain", "Drizzle", "Thunderstorm"].includes(weather)) {
     document.body.classList.add("rainy");
     document.getElementById("rainEffect").classList.add("active");
+    const rain = document.createElement('div');
+    rain.className = 'rain';
+    for (let i = 0; i < 5; i++) {
+      const drop = document.createElement('div');
+      drop.className = 'drop';
+      drop.style.animationDelay = `${i * 0.3}s`;
+      rain.appendChild(drop);
+    }
+    document.querySelector('.weather-app').appendChild(rain);
   } else if (weather === "Snow") {
     document.body.classList.add("cloudy");
     document.getElementById("snowEffect").classList.add("active");
   } else if (weather === "Clouds") {
     document.body.classList.add("cloudy");
+  } else if (
+    ["Mist", "Fog", "Haze", "Smoke", "Dust", "Sand"].includes(weather)
+  ) {
+    document.body.classList.add("cloudy");
   } else {
+    console.warn("Unrecognized weather type:", weather);
     document.body.classList.add("cloudy");
   }
+}
+
+function showLoading() {
+  const loading = document.querySelector('.loading');
+  if (loading) loading.style.display = 'block';
+}
+
+function hideLoading() {
+  const loading = document.querySelector('.loading');
+  if (loading) loading.style.display = 'none';
 }
