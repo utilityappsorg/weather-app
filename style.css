@@ -1,6 +1,6 @@
 body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(to right, #00c6ff, #0072ff);
+  font-family: Calibri, 'Trebuchet MS', sans-serif;
+  background: linear-gradient(to right, #029dc8, #014daa);
   color: #fff;
   display: flex;
   justify-content: center;
@@ -32,8 +32,92 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #weatherResult {
   margin-top: 20px;
 }
+
+/* Loading spinner styles */
+.loading {
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  display: block;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animations */
+
+.sun {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  width: 60px;
+  height: 60px;
+  background: #ffde17;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #ffde17;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); box-shadow: 0 0 30px #ffde17; }
+  100% { transform: scale(1); }
+}
+
+.rain {
+  position: absolute;
+  top: 70px;
+  left: 30px;
+  display: flex;
+  justify-content: space-around;
+  width: 60px;
+}
+.drop {
+  width: 3px;
+  height: 15px;
+  background: #68c3fe;
+  border-radius: 3px;
+  animation: rain-drop 1.5s infinite linear;
+}
+@keyframes rain-drop {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(40px); opacity: 0; }
+}
+
+.snow {
+  position: absolute;
+  top: 70px;
+  left: 30px;
+  display: flex;
+  justify-content: space-around;
+  width: 60px;
+}
+.snowflake {
+  width: 5px;
+  height: 5px;
+  background: #fff;
+  border-radius: 50%;
+  animation: snow-fall 2s infinite linear;
+}
+@keyframes snow-fall {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(40px); opacity: 0; }
+}
+
+
+
