@@ -1,4 +1,5 @@
 async function getWeather() {
+  document.getElementById("loadingSpinner").style.display = "block"; // Show spinner
   const city = document.getElementById("cityInput").value;
   window.lastCity = city; // Save for unit toggle
   const apiKey = "d93ac9850368ef32ae6d5817e2826b26"; // Replace with your OpenWeatherMap API key
@@ -6,6 +7,7 @@ async function getWeather() {
 
   try {
     const response = await fetch(url);
+    document.getElementById("loadingSpinner").style.display = "none"; // Hide spinner
     if (!response.ok) {
       document.getElementById("weatherResult").innerHTML = "City not found.";
       return;
@@ -26,6 +28,7 @@ async function getWeather() {
     const isNight = data.dt < data.sys.sunrise || data.dt > data.sys.sunset;
     setWeatherBackground(weatherMain, isNight);
   } catch (error) {
+    document.getElementById("loadingSpinner").style.display = "none"; // Hide spinner
     document.getElementById("weatherResult").innerHTML = "An error occurred.";
     console.error("Error fetching weather data:", error);
   }
@@ -58,12 +61,14 @@ window.onload = function() {
 };
 
 function getWeatherByCoords(lat, lon) {
+  document.getElementById("loadingSpinner").style.display = "block"; // Show spinner
   window.lastCoords = { lat, lon }; // Save for unit toggle
   const apiKey = "d93ac9850368ef32ae6d5817e2826b26"; // Replace with your OpenWeatherMap API key
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${currentUnit}`;
 
   fetch(url)
     .then(response => {
+      document.getElementById("loadingSpinner").style.display = "none"; // Hide spinner
       if (!response.ok) {
         document.getElementById("weatherResult").innerHTML = "Location not found.";
         return;
@@ -87,6 +92,7 @@ function getWeatherByCoords(lat, lon) {
       setWeatherBackground(weatherMain, isNight);
     })
     .catch(error => {
+      document.getElementById("loadingSpinner").style.display = "none"; // Hide spinner
       document.getElementById("weatherResult").innerHTML = "An error occurred.";
       console.error("Error fetching weather data:", error);
     });
