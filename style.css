@@ -1,17 +1,7 @@
-:root {
-  --bg-gradient: linear-gradient(to right, #00c6ff, #0072ff);
-  --app-bg: rgba(0, 0, 0, 0.4);
-  --text-color: #fff;
-  --button-bg: #fff;
-  --button-color: #0072ff;
-}
-
 body {
-
   font-family: Calibri, 'Trebuchet MS', sans-serif;
-  background: var(--bg-gradient);
-  color: var(--text-color);
-
+  background: linear-gradient(to right, #029dc8, #014daa);
+  color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,7 +10,7 @@ body {
 }
 
 .weather-app {
-  background-color: var(--app-bg);
+  background-color: rgba(0, 0, 0, 0.4);
   padding: 30px;
   border-radius: 10px;
   text-align: center;
@@ -37,8 +27,8 @@ input {
 
 button {
   padding: 10px 20px;
-  background-color: var(--button-bg);
-  color: var(--button-color);
+  background-color: #fff;
+  color: #0072ff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -48,7 +38,6 @@ button {
 #weatherResult {
   margin-top: 20px;
 }
-
 
 /* Loading spinner styles */
 .loading {
@@ -110,82 +99,23 @@ button {
   100% { transform: translateY(40px); opacity: 0; }
 }
 
-
-
-/* Dark mode styles */
-body.light-mode {
-  --bg-gradient: linear-gradient(to right, #e0eafc, #cfdef3);
-  --app-bg: rgba(255, 255, 255, 0.8);
-  --text-color: #222;
-  --button-bg: #00c3ff;
-  --button-color: #ffffff79;
-}
-
-/* Add to style.css */
-.switch {
+.snow {
+  position: absolute;
+  top: 70px;
+  left: 30px;
   display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-  font-size: 14px;
-  gap: 8px;
+  justify-content: space-around;
+  width: 60px;
 }
-.switch input {
-  accent-color: #0072ff;
+.snowflake {
+  width: 5px;
+  height: 5px;
+  background: #fff;
+  border-radius: 50%;
+  animation: snow-fall 2s infinite linear;
 }
-
-/* Add these at the end of your CSS file */
-body.sunny {
-  --bg-gradient: linear-gradient(to right, #fceabb, #f8b500);
-}
-body.rainy {
-  --bg-gradient: linear-gradient(to right, #bdc3c7, #2c3e50);
-}
-body.cloudy {
-  --bg-gradient: linear-gradient(to right, #ece9e6, #a1c4fd);
-}
-body.night {
-  --bg-gradient: linear-gradient(to right, #232526, #414345);
+@keyframes snow-fall {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(40px); opacity: 0; }
 }
 
-.weather-effect {
-  pointer-events: none;
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  z-index: 10;
-  overflow: hidden;
-  display: none;
-}
-
-/* Rain animation */
-#rainEffect {
-  display: none;
-}
-#rainEffect.active {
-  display: block;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.1) 0px,
-    rgba(255,255,255,0.1) 2px,
-    transparent 2px,
-    transparent 20px
-  );
-  animation: rainMove 0.5s linear infinite;
-}
-@keyframes rainMove {
-  0% { background-position: 0 0; }
-  100% { background-position: 10px 20px; }
-}
-
-/* Snow animation */
-#snowEffect {
-  display: none;
-}
-#snowEffect.active {
-  display: block;
-  background-image: url('data:image/svg+xml;utf8,<svg width="10" height="10" xmlns="http://www.w3.org/2000/svg"><circle cx="5" cy="5" r="2" fill="white" fill-opacity="0.7"/></svg>');
-  animation: snowMove 2s linear infinite;
-}
-@keyframes snowMove {
-  0% { background-position: 0 0; }
-  100% { background-position: 20px 40px; }
-}
