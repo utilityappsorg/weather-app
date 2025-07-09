@@ -1,8 +1,10 @@
 async function getWeather() {
   const city = document.getElementById("cityInput").value;
+
   window.lastCity = city; // Save for unit toggle
   const apiKey = "d93ac9850368ef32ae6d5817e2826b26"; // Replace with your OpenWeatherMap API key
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${currentUnit}`;
+
 
   try {
     const response = await fetch(url);
