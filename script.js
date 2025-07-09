@@ -1,7 +1,7 @@
 async function getWeather() {
   const city = document.getElementById("cityInput").value;
   window.lastCity = city; // Save for unit toggle
-  const apiKey = "YOUR_API_KEY"; // Replace with your OpenWeatherMap API key
+  const apiKey = "d93ac9850368ef32ae6d5817e2826b26"; // Replace with your OpenWeatherMap API key
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${currentUnit}`;
 
   try {
@@ -59,7 +59,7 @@ window.onload = function() {
 
 function getWeatherByCoords(lat, lon) {
   window.lastCoords = { lat, lon }; // Save for unit toggle
-  const apiKey = "YOUR_API_KEY"; // Replace with your OpenWeatherMap API key
+  const apiKey = "d93ac9850368ef32ae6d5817e2826b26"; // Replace with your OpenWeatherMap API key
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${currentUnit}`;
 
   fetch(url)
