@@ -12,6 +12,20 @@
     <input type="text" id="cityInput" placeholder="Enter city name..." />
     <button onclick="getWeather()">Get Weather</button>
     <div id="weatherResult"></div>
+    <!-- Place inside your .weather-app div -->
+    <label class="switch">
+      <input type="checkbox" id="themeToggle">
+      <span class="slider"></span> Dark Mode
+    </label>
+    <!-- Example: -->
+    <div class="unit-toggle">
+      <label>
+        <input type="checkbox" id="unitToggle">
+        <span id="unitLabel">Show °F</span>
+      </label>
+    </div>
+    <div id="rainEffect" class="weather-effect"></div>
+    <div id="snowEffect" class="weather-effect"></div>
   </div>
   <script src="script.js"></script>
 </body>
