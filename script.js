@@ -39,9 +39,18 @@ async function getWeather() {
 window.onload = function() {
   // Theme toggle
   const themeToggle = document.getElementById("themeToggle");
-  if (themeToggle) {
+  const slider = document.querySelector('.switch .slider');
+  if (themeToggle && slider) {
+    // Ensure slider is clickable
+    slider.addEventListener('click', function() {
+      themeToggle.checked = !themeToggle.checked;
+      document.body.classList.toggle("dark-mode", themeToggle.checked);
+      document.querySelector('.weather-app').classList.toggle("dark-mode", themeToggle.checked);
+    });
+    // Sync toggle if checkbox is changed (keyboard, etc)
     themeToggle.addEventListener("change", function() {
-      document.body.classList.toggle("light-mode", this.checked);
+      document.body.classList.toggle("dark-mode", this.checked);
+      document.querySelector('.weather-app').classList.toggle("dark-mode", this.checked);
     });
   }
 
