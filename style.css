@@ -193,7 +193,7 @@ button {
   transform: translateX(14px);
 }
 
-/* Dark mode styles */
+/* Dark mode style for website */
 body.dark-mode {
   background: linear-gradient(to right, #181c25, #232526);
   color: #e0eafc;
