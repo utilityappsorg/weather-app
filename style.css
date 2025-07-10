@@ -1,12 +1,12 @@
 body {
   font-family: Calibri, 'Trebuchet MS', sans-serif;
-  background: linear-gradient(to right, #596e74, #415b7a);
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
+  background: linear-gradient(to right, #596e74, #415b7a); /* <-- ADD THIS LINE */
 }
 
 .weather-app {
@@ -216,5 +216,4 @@ body.dark-mode .switch .slider {
 body.dark-mode .switch input[type="checkbox"]:checked + .slider {
   background: #00c3ff;
 }
-
 
