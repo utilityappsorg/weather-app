@@ -41,7 +41,7 @@ window.onload = function() {
   const themeToggle = document.getElementById("themeToggle");
   const slider = document.querySelector('.switch .slider');
   if (themeToggle && slider) {
-    // Ensure slider is clickable
+    
     slider.addEventListener('click', function() {
       themeToggle.checked = !themeToggle.checked;
       document.body.classList.toggle("dark-mode", themeToggle.checked);
